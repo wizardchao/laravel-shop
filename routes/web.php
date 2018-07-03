@@ -52,3 +52,10 @@ Route::get('products/{product}', 'ProductsController@show')->name('products.show
 // 开始
 
 // 结束
+// Route::get('alipay', function() {
+//     return app('alipay')->web([
+//         'out_trade_no' => time(),
+//         'total_amount' => '1',
+//         'subject' => 'test subject - 测试',
+//     ]);
+// });
