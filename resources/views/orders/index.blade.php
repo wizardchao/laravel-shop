@@ -46,7 +46,10 @@
                 <td class="sku-amount text-center">{{ $item->amount }}</td>
                 @if($index === 0)
                 <td rowspan="{{ count($order->items) }}" class="text-center total-amount">￥{{ $order->total_amount }}</td>
+
                 <td rowspan="{{ count($order->items) }}" class="text-center">
+
+
                   @if($order->paid_at)
                     @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
                       已支付
@@ -61,7 +64,16 @@
                     否则订单将自动关闭
                   @endif
                 </td>
-                <td rowspan="{{ count($order->items) }}" class="text-center"><a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a></td>
+                <td rowspan="{{ count($order->items) }}" class="text-center">
+                  <!-- 评价入口开始 -->
+                   @if($order->paid_at)
+                    <a class="btn btn-success btn-xs" href="{{ route('orders.review.show', ['order' => $order->id]) }}">
+                     {{ $order->reviewed ? '查看评价' : '评价' }}
+                      </a>
+                      @endif
+                     <!-- 评价入口结束 -->
+                       <a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a>
+                </td>
                 @endif
               </tr>
               @endforeach
